@@ -1,0 +1,37 @@
+{% extends "basic.html" %}
+{% load static %}
+
+{% block styles_link %}
+<link href="{% static 'css/index.css' %}" rel="stylesheet" type="text/css">
+<!--<script defer src="https://pyscript.net/alpha/pyscript.js"></script>-->
+{% endblock styles_link %}
+
+{% block title %} Welcome to To-Do-Do-Doo {% endblock title %}
+
+{% block content %}
+<header>
+    <a class="first">
+        <div>sign in</div>
+    </a>
+    <a>
+        <div>sign up</div>
+    </a>
+</header>
+<main>
+    <!--<h1><py-script> print("python is here")</py-script></h1>-->
+    <section class="main-block">
+        <section class="text-section">
+            <div class="dark-blue">
+                <b>To do or not to do?</b>
+            </div>
+            <div class="dark-blue">
+                <b>Of course ToDoDoDoo!!!</b>
+            </div>
+
+        </section>
+    </section>
+    <section class="main-block">
+        <img src="{% static 'img/planning-image.jpg' %}">
+    </section>
+</main>
+{% endblock content %}
