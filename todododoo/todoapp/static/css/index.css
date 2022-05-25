@@ -9,8 +9,8 @@
 
 .text-section {
   margin-top: 150px;
-  font-size: 45px;
-  margin-left: 70px;
+  font-size: 60px;
+  margin-left: 150px;
 }
 
 a {
@@ -25,6 +25,10 @@ a {
   font-size: 20px;
   text-align: center;
   line-height: 45px;
+}
+
+a div {
+  text-decoration: none;
 }
 
 .first {
@@ -46,4 +50,5 @@ a {
 img {
   height: 500px;
   width: auto;
+  pointer-events: none;
 }

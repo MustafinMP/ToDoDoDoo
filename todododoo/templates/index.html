@@ -4,16 +4,16 @@
 {% block styles_link %}
 <link href="{% static 'css/index.css' %}" rel="stylesheet" type="text/css">
 <!--<script defer src="https://pyscript.net/alpha/pyscript.js"></script>-->
-{% endblock styles_link %}
+{% endblock %}
 
-{% block title %} Welcome to To-Do-Do-Doo {% endblock title %}
+{% block title %} Welcome to To-Do-Do-Doo {% endblock %}
 
 {% block content %}
 <header>
-    <a class="first">
+    <a class="first" href="register/">
         <div>sign in</div>
     </a>
-    <a>
+    <a href="login/">
         <div>sign up</div>
     </a>
 </header>
@@ -22,16 +22,16 @@
     <section class="main-block">
         <section class="text-section">
             <div class="dark-blue">
-                <b>To do or not to do?</b>
+                <b>To do or </b>
             </div>
             <div class="dark-blue">
-                <b>Of course ToDoDoDoo!!!</b>
+                <b>not to do?</b>
             </div>
 
         </section>
     </section>
     <section class="main-block">
-        <img src="{% static 'img/planning-image.jpg' %}">
+        <img src="{% static 'img/planning-image.jpg' %}" class="image">
     </section>
 </main>
-{% endblock content %}
+{% endblock %}
