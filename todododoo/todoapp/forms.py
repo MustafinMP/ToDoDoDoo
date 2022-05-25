@@ -9,8 +9,8 @@ class RegisterForm(forms.Form):
     e_mail = forms.EmailField(label='Email:')
     password = forms.CharField(label='Password:',
                                widget=forms.PasswordInput)
-    # confirm_password = forms.CharField(label='Password:',
-    #                                    widget=forms.PasswordInput)
+    confirm_password = forms.CharField(label='Password:',
+                                       widget=forms.PasswordInput)
 
 
 class LoginForm(forms.Form):
