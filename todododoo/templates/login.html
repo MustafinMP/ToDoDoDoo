@@ -1,0 +1,31 @@
+{% extends "basic.html" %}
+{% load static %}
+
+{% block styles_link %}
+<link href="{% static 'css/login.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block title %} Sign up {% endblock title %}
+{% block content %}
+
+<div class="form-block">
+        <div class="enter-label">Sign in</div>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-line">
+            <div class="label-tag">{{ form.username.label_tag }}</div><br>
+            {{ form.username }}<br>
+            {{ form.username.errors }}
+        </div>
+        <div class="form-line">
+            <div class="label-tag">{{ form.password.label_tag }}</div><br>
+            {{ form.password }}<br>
+            {{ form.password.errors }}
+        </div>
+        <div class="form-line button-input">
+            <input type="submit" value="Войти">
+        </div>
+        <a class="form-line no-account" href="/register/">Нет аккаунта? зарегистрироваться >></a>
+    </form>
+</div>
+{% endblock %}

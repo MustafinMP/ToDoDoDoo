@@ -20,6 +20,9 @@ def task(request):
 
 
 def register(request):
+    if request.user.is_authenticated:
+        return HttpResponsePermanentRedirect('/')
+
     if request.method == 'POST':
         register_form = RegisterForm(request.POST)
 
@@ -47,3 +50,26 @@ def register(request):
     else:
         register_form = RegisterForm()
         return render(request, 'register.html', {'form': register_form})
+
+
+def login_(request):
+    if request.user.is_authenticated:
+        return HttpResponsePermanentRedirect('/')
+    if request.method == 'POST':
+        login_form = LoginForm(request.POST)
+        if login_form.is_valid():
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return HttpResponsePermanentRedirect('/')
+
+            else:
+                login_form.add_error(password, 'Wrong password')
+                return render(request, 'login.html', {'form': login_form})
+        else:
+            return HttpResponsePermanentRedirect('/')
+    else:
+        login_form = LoginForm()
+        return render(request, 'login.html', {'form': login_form})

@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 
 
 class RegisterForm(forms.Form):
@@ -13,6 +13,6 @@ class RegisterForm(forms.Form):
                                        widget=forms.PasswordInput)
 
 
-class LoginForm(forms.Form):
+class LoginForm(AuthenticationForm):
     username = forms.CharField(label='username')
     password = forms.CharField(widget=forms.PasswordInput)

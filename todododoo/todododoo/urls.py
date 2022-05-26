@@ -23,5 +23,6 @@ from todoapp import views
 urlpatterns = [
     path('', views.index),
     path('admin/', admin.site.urls),
-    path('register/', views.register)
+    path('register/', views.register),
+    path('login/', views.login_)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
