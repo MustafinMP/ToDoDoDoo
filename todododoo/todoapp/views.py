@@ -28,24 +28,24 @@ def register(request):
 
         if register_form.is_valid():
             username = request.POST['username']
+            try:
+                if User.objects.get_by_natural_key(username):
+                    register_form.add_error('username', 'Name is ')
+                    return render(request, 'register.html', {'form': register_form})
+            except:
+                password = request.POST['password']
+                confirm_password = request.POST['confirm_password']
+                if password != confirm_password:
+                    register_form.add_error('confirm_password', "Password isn't ")
+                    return render(request, 'register.html', {'form': register_form})
 
-            if User.objects.get_by_natural_key(username):
-                register_form.add_error(username, 'Name is ')
-                return render(request, 'register.html', {'form': register_form})
-
-            password = request.POST['password']
-            confirm_password = request.POST['confirm_password']
-            if password != confirm_password:
-                register_form.add_error(confirm_password, "Password isn't ")
-                return render(request, 'register.html', {'form': register_form})
-
-            e_mail = request.POST['e_mail']
-            user = User.objects.create_user(username, e_mail, password)
-            user.first_name = request.POST['first_name']
-            user.last_name = request.POST['last_name']
-            user.save()
-            login(request, user)
-            return HttpResponsePermanentRedirect('/')
+                e_mail = request.POST['e_mail']
+                user = User.objects.create_user('username', e_mail, password)
+                user.first_name = request.POST['first_name']
+                user.last_name = request.POST['last_name']
+                user.save()
+                login(request, user)
+                return HttpResponsePermanentRedirect('/')
 
     else:
         register_form = RegisterForm()
@@ -60,13 +60,14 @@ def login_(request):
         if login_form.is_valid():
             username = request.POST.get('username')
             password = request.POST.get('password')
+            login_form.save()
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
                 return HttpResponsePermanentRedirect('/')
 
             else:
-                login_form.add_error(password, 'Wrong password')
+                login_form.add_error('password', 'Wrong password')
                 return render(request, 'login.html', {'form': login_form})
         else:
             return HttpResponsePermanentRedirect('/')
