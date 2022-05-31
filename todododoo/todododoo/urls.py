@@ -21,6 +21,7 @@ from todoapp import views
 
 urlpatterns = [
                   path('', views.index),
+                  path('calendar/', views.calendar),
                   path('admin/', admin.site.urls),
                   path('accounts/', include('django.contrib.auth.urls')),
                   path('register/', views.register),

@@ -1,0 +1,28 @@
+{% extends "basic.html" %}
+{% load static %}
+
+{% block styles_link %}
+<link href="{% static 'css/future_tasks.css' %}" rel="stylesheet" type="text/css">
+<!--<script defer src="https://pyscript.net/alpha/pyscript.js"></script>-->
+{% endblock %}
+
+{% block title %} My tasks {% endblock %}
+
+{% block content %}
+<header>
+    <h1 class="header-label">My tasks</h1>
+    <a class="logout" href="logout/">Logout</a>
+</header>
+<main>
+    {% for date, tasks in tasks_dir.items %}
+    <h2>{{ date }}</h2>
+    {% for task in tasks %}
+    <a class="task">
+        <h2>{{ task.0 }}</h2>
+        <p>{{ task.1 }}</p>
+        <h4>{{ task.2 }}</h4>
+    </a>
+    {% endfor %}
+    {% endfor %}
+</main>
+{% endblock %}

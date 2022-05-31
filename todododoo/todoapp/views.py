@@ -1,18 +1,24 @@
 from django.shortcuts import render
-from .forms import RegisterForm, LoginForm
 from django.contrib.auth.models import User
 from django.http import HttpResponsePermanentRedirect
 from django.contrib.auth import authenticate, login
+from .forms import RegisterForm, LoginForm
+from .models import Task
+from .tools import get_tasks
+import datetime
 
 
 def index(request):
-    # if request.user.is_authenticated:
-    #     return  # TODO redirect to calendar page
+    if request.user.is_authenticated:
+        return HttpResponsePermanentRedirect('calendar/')
     return render(request, 'index.html')
 
 
-def calendar(request):
-    return render(request, 'calendar.html')
+def future_tasks(request):
+    if not request.user.is_authenticated:
+        return HttpResponsePermanentRedirect('/')
+    tasks_dir = get_tasks(request.user.id)
+    return render(request, 'future_tasks.html', {'tasks_dir': tasks_dir})
 
 
 def task(request):
@@ -21,7 +27,7 @@ def task(request):
 
 def register(request):
     if request.user.is_authenticated:
-        return HttpResponsePermanentRedirect('/')
+        return HttpResponsePermanentRedirect('calendar/')
 
     if request.method == 'POST':
         register_form = RegisterForm(request.POST)
@@ -45,7 +51,7 @@ def register(request):
                 user.last_name = request.POST['last_name']
                 user.save()
                 login(request, user)
-                return HttpResponsePermanentRedirect('/')
+                return HttpResponsePermanentRedirect('/calendar/')
 
     else:
         register_form = RegisterForm()
@@ -54,7 +60,7 @@ def register(request):
 
 def login_(request):
     if request.user.is_authenticated:
-        return HttpResponsePermanentRedirect('/')
+        return HttpResponsePermanentRedirect('/calendar/')
     if request.method == 'POST':
         login_form = LoginForm(request.POST)
         if login_form.is_valid():
@@ -64,7 +70,7 @@ def login_(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return HttpResponsePermanentRedirect('/')
+                return HttpResponsePermanentRedirect('calendar/')
 
             else:
                 login_form.add_error('password', 'Wrong password')

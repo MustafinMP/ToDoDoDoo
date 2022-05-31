@@ -12,3 +12,6 @@ class Task(models.Model):
                                 blank=True,
                                 null=True)
     is_finished = models.BooleanField()
+
+    class Meta:
+        ordering = ['-date']
