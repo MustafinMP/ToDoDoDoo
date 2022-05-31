@@ -10,7 +10,7 @@ def get_tasks(user_id):
     for task in tasks_db:
         task_date = str(task.date)
         if task_date in tasks.keys():
-            tasks[task_date].append([task.title, task.description, task.is_finished])
+            tasks[task_date].append([task.id, task.title, task.description, task.is_finished])
         else:
-            tasks[task_date] = [[task.title, task.description, task.is_finished]]
+            tasks[task_date] = [[task.id, task.title, task.description, task.is_finished]]
     return tasks
