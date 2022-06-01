@@ -3,6 +3,7 @@
 
 {% block styles_link %}
 <link href="{% static 'css/tasks.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'css/tasks_display.css' %}" rel="stylesheet" type="text/css">
 <!--<script defer src="https://pyscript.net/alpha/pyscript.js"></script>-->
 {% endblock %}
 
@@ -14,23 +15,53 @@
     <a class="logout" href="logout/">Logout</a>
 </header>
 <main>
-    {% for date, tasks in tasks_dir.items %}
-    <section class="date-block">
-        <h2 class="date-head">{{ date }}</h2>
-        {% for task in tasks %}
-        <a class="task" href="task/{{ task.0 }}">
-            <h2>{{ task.1 }}</h2>
-            <h3>Description:</h3>
-            <p>{{ task.2 }}</p>
-            {% if task.3 %}
-            <h4 class="task-good">Task is completed</h4>
-            {% else %}
-            <h4 class="task-danger">Task is not completed</h4>
-            {% endif %}
-        </a>
-        {% endfor %}
+    <section class="btns">
+        <button class="content-button" onclick="showLast()">Last tasks</button>
+        <button class="content-button" onclick="showFuture()">Future tasks</button>
     </section>
 
-    {% endfor %}
+    <section class="content-display">
+        <article class="last-tasks none-display">
+            <h1>past</h1>
+            {% for date, tasks in tasks_last.items %}
+            <section class="date-block">
+                <h2 class="date-head">{{ date }}</h2>
+                {% for task in tasks %}
+                <a class="task" href="task/{{ task.0 }}">
+                    <h2>{{ task.1 }}</h2>
+                    <h3>Description:</h3>
+                    <p>{{ task.2 }}</p>
+                    {% if task.3 %}
+                    <h4 class="task-good">Task is completed</h4>
+                    {% else %}
+                    <h4 class="task-danger">Task is not completed</h4>
+                    {% endif %}
+                </a>
+                {% endfor %}
+            </section>
+            {% endfor %}
+        </article>
+        <article class="future-tasks">
+            <h1>future</h1>
+            {% for date, tasks in tasks_dir.items %}
+            <section class="date-block">
+                <h2 class="date-head">{{ date }}</h2>
+                {% for task in tasks %}
+                <a class="task" href="task/{{ task.0 }}">
+                    <h2>{{ task.1 }}</h2>
+                    <h3>Description:</h3>
+                    <p>{{ task.2 }}</p>
+                    {% if task.3 %}
+                    <h4 class="task-good">Task is completed</h4>
+                    {% else %}
+                    <h4 class="task-danger">Task is not completed</h4>
+                    {% endif %}
+                </a>
+                {% endfor %}
+            </section>
+            {% endfor %}
+        </article>
+    </section>
 </main>
+<script src="{% static 'js/tasks.js' %}"></script>
 {% endblock %}
