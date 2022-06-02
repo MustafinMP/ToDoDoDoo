@@ -7,11 +7,11 @@ class Task(models.Model):
     description = models.TextField(blank=True,
                                    null=True)
     date = models.DateField()
-    user = models.OneToOneField(User,
+    user = models.ForeignKey(User,
                                 on_delete=models.PROTECT,
                                 blank=True,
                                 null=True)
     is_finished = models.BooleanField()
 
     class Meta:
-        ordering = ['-date']
+        ordering = ['date']

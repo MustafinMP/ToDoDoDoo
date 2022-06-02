@@ -15,12 +15,12 @@
     <a class="logout" href="logout/">Logout</a>
 </header>
 <main>
-    <section class="btns">
+    <section class="content-block buttons-block">
         <button class="content-button" onclick="showLast()">Last tasks</button>
         <button class="content-button" onclick="showFuture()">Future tasks</button>
     </section>
 
-    <section class="content-display">
+    <section class="content-block content-display">
         <article class="last-tasks none-display">
             <h1>past</h1>
             {% for date, tasks in tasks_last.items %}
